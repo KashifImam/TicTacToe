@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import '../ai/ai.dart';
 import '../custom/symbolo.dart';
@@ -9,9 +10,6 @@ import 'game_presenter.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({Key? key}) : super(key: key);
-
-
-
 
   @override
   GamePageState createState() => GamePageState();
@@ -107,58 +105,96 @@ class GamePageState extends State<GamePage> {
         (MediaQuery.of(context).padding.bottom) -
         kToolbarHeight;
 
-    final double itemHeight = (height * 0.64)/3.0;
+    final double itemHeight = (height * 0.64) / 3.0;
     final double itemWidth = width / 3;
 
     return Scaffold(
       backgroundColor: MyTheme.bgColor,
       appBar: AppBar(
-
         centerTitle: true,
         elevation: 0,
         actions: [
-          IconButton(icon: const Icon(Icons.refresh,
-          color: MyTheme.pink,), onPressed: () {
-            yourWins = 0;
-            comWins = 0;
-            setState(() {
-              reinitialize();
-            });
-
-          }),
+          IconButton(
+              icon: const Icon(
+                Icons.refresh,
+                color: MyTheme.kTextWhiteColor,
+              ),
+              onPressed: () {
+                yourWins = 0;
+                comWins = 0;
+                setState(() {
+                  reinitialize();
+                });
+              }),
         ],
         backgroundColor: MyTheme.pink,
-        title: RichText(
-          textAlign: TextAlign.start,
-          text: const TextSpan(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
 
-            children: [
-              TextSpan(
-                text: "Tic",
-                style:  TextStyle(
-                    fontSize: 24,
-                    color: MyTheme.blue,
-                    fontFamily: 'Mazzard',
-                    fontWeight: FontWeight.normal),
+          children: [
+            NeumorphicText(
+              "  TIC",
+              style: const NeumorphicStyle(
+                  color: MyTheme.pink,
+                  lightSource: LightSource.left,
+                  depth: 3,
+                  shadowDarkColor: MyTheme.yellow,
+                  shadowLightColor: MyTheme.yellow,
+                  border: NeumorphicBorder(
+                    color: MyTheme.yellow,
+                    width: 0.4,
+
+                  )),
+              textStyle: NeumorphicTextStyle(
+                fontSize: 24,
+
+
+                  fontFamily: 'Mazzard',
+                  fontWeight: FontWeight.bold
+
+                //customize size here
+                // AND others usual text style properties (fontFamily, fontWeight, ...)
               ),
-              TextSpan(
-                text: " Tac",
-                style:  TextStyle(
-                    fontSize: 24,
-                    color: MyTheme.pink,
-                    fontFamily: 'Mazzard',
-                    fontWeight: FontWeight.normal),
+            ),
+            NeumorphicText(
+              " TAC",
+              style: const NeumorphicStyle(
+                  color: MyTheme.pink,
+                  lightSource: LightSource.left,
+                  depth: 3,
+                  shadowDarkColor: MyTheme.yellow,
+                  shadowLightColor: MyTheme.yellow,
+                  border: NeumorphicBorder(
+                    color: MyTheme.yellow,
+                    width: 0.4,
+                  )),
+              textStyle: NeumorphicTextStyle(
+                fontSize: 24,
+                  fontFamily: 'Mazzard',
+                  fontWeight: FontWeight.bold//customize size here
+                // AND others usual text style properties (fontFamily, fontWeight, ...)
               ),
-              TextSpan(
-                text: " Toe",
-                style:  TextStyle(
-                    fontSize: 24,
-                    color: MyTheme.blue,
-                    fontFamily: 'Mazzard',
-                    fontWeight: FontWeight.normal),
+            ),
+            NeumorphicText(
+              " TOE",
+              style: const NeumorphicStyle(
+                  color: MyTheme.pink,
+                  lightSource: LightSource.left,
+                  depth: 3,
+                  shadowDarkColor: MyTheme.yellow,
+                  shadowLightColor: MyTheme.yellow,
+                  border: NeumorphicBorder(
+                    color: MyTheme.yellow,
+                    width: 0.4,
+                  )),
+              textStyle: NeumorphicTextStyle(
+                fontSize: 24,
+                  fontFamily: 'Mazzard',
+                  fontWeight: FontWeight.bold//customize size here
+                // AND others usual text style properties (fontFamily, fontWeight, ...)
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       body: Container(
@@ -167,7 +203,6 @@ class GamePageState extends State<GamePage> {
             colors: [MyTheme.gredColor2, MyTheme.gredColor1],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-
           ),
         ),
         child: Column(
@@ -190,7 +225,7 @@ class GamePageState extends State<GamePage> {
                           "You are",
                           style: TextStyle(
                               fontSize: 16,
-                              color: MyTheme.pink,
+                              color: MyTheme.kTextWhiteColor,
                               fontFamily: 'Mazzard',
                               fontWeight: FontWeight.normal),
                         ),
@@ -201,7 +236,6 @@ class GamePageState extends State<GamePage> {
                       ],
                     ),
                   ),
-
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -211,7 +245,7 @@ class GamePageState extends State<GamePage> {
                           "Computer",
                           style: TextStyle(
                               fontSize: 16,
-                              color: MyTheme.blue,
+                              color: MyTheme.kTextWhiteColor,
                               fontFamily: 'Mazzard',
                               fontWeight: FontWeight.normal),
                         ),
@@ -225,7 +259,6 @@ class GamePageState extends State<GamePage> {
                 ],
               ),
             ),
-
             Container(
               // color: MyTheme.lightBlueBack,
               // color: MyTheme.lightBlueBack,
@@ -251,22 +284,20 @@ class GamePageState extends State<GamePage> {
               padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
-
                 children: [
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children:  [
+                      children: [
                         Text(
                           "${yourWins}",
                           style: const TextStyle(
                               fontSize: 36,
-                              color: MyTheme.pink,
+                              color: MyTheme.yellow,
                               fontFamily: 'Mazzard',
-                              fontWeight: FontWeight.normal),
+                              fontWeight: FontWeight.bold),
                         ),
-
                         const SizedBox(
                           height: 4,
                         ),
@@ -274,36 +305,34 @@ class GamePageState extends State<GamePage> {
                           "Your Wins",
                           style: TextStyle(
                               fontSize: 14,
-                              color: MyTheme.kTextDarkColor,
+                              color: MyTheme.kTextWhiteColor,
                               fontFamily: 'Mazzard',
                               fontWeight: FontWeight.normal),
                         ),
                       ],
                     ),
                   ),
-
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children:  [
+                      children: [
                         Text(
                           "$comWins",
                           style: const TextStyle(
                               fontSize: 36,
-                              color: MyTheme.blue,
+                              color: MyTheme.green,
                               fontFamily: 'Mazzard',
-                              fontWeight: FontWeight.normal),
+                              fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(
                           height: 4,
                         ),
-
                         const Text(
                           "Computer's Wins",
                           style: TextStyle(
                               fontSize: 14,
-                              color: MyTheme.kTextDarkColor,
+                              color: MyTheme.kTextWhiteColor,
                               fontFamily: 'Mazzard',
                               fontWeight: FontWeight.normal),
                         ),
@@ -313,7 +342,6 @@ class GamePageState extends State<GamePage> {
                 ],
               ),
             ),
-
           ],
         ),
       ),
