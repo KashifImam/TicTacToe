@@ -14,7 +14,7 @@ class Field extends StatelessWidget {
 
   Field({required this.idx, required this.onTap, required this.playerSymbol});
 
-  final BorderSide _borderSide =  BorderSide(
+  final BorderSide _borderSide =  const BorderSide(
       color: MyTheme.kTextGreyColor,
       width: 0.5,
       style: BorderStyle.solid

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:tictactoerapidor/ui/final_page.dart';
 
 import '../ai/ai.dart';
 import '../custom/symbolo.dart';
@@ -15,7 +16,7 @@ class GamePage extends StatefulWidget {
   GamePageState createState() => GamePageState();
 }
 
-class GamePageState extends State<GamePage> {
+class GamePageState extends State<GamePage> with TickerProviderStateMixin{
   late List<int> board;
   late int _currentPlayer;
 
@@ -28,11 +29,32 @@ class GamePageState extends State<GamePage> {
     _presenter = GamePresenter(_movePlayed, _onGameEnd);
   }
 
+  void showBottomSheet(BuildContext context, int type, String title, String content) {
+    AnimationController controller;
+    controller = BottomSheet.createAnimationController(this);
+    controller.duration = Duration(milliseconds: 600);
+
+    showModalBottomSheet(
+        context: context,
+        transitionAnimationController: controller,
+        // isScrollControlled: true,
+        builder: (context) {
+          return FractionallySizedBox(
+            // heightFactor: 0.7,
+            child: FinalPage(type: type, title: title, content: content),
+          );
+        });
+
+    // builder: (BuildContext buildContext) => BottomActivateAcc());
+  }
+
   void _onGameEnd(int winner) {
+    reinitialize();
     var title = "Game over!";
     var content = "You lose :(";
     switch (winner) {
-      case Ai.HUMAN: // will never happen :)
+
+      case Ai.HUMAN:
         title = "Congratulations!";
         content = "You managed to beat an unbeatable AI!";
         yourWins = yourWins + 1;
@@ -46,25 +68,27 @@ class GamePageState extends State<GamePage> {
         title = "Draw!";
         content = "No winners here.";
     }
+    showBottomSheet(context, winner, title, content);
 
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(title),
-            content: Text(content),
-            actions: <Widget>[
-              new FlatButton(
-                  onPressed: () {
-                    setState(() {
-                      reinitialize();
-                      Navigator.of(context).pop();
-                    });
-                  },
-                  child: Text("Restart"))
-            ],
-          );
-        });
+
+    // showDialog(
+    //     context: context,
+    //     builder: (BuildContext context) {
+    //       return AlertDialog(
+    //         title: Text(title),
+    //         content: Text(content),
+    //         actions: <Widget>[
+    //           new FlatButton(
+    //               onPressed: () {
+    //                 setState(() {
+    //                   reinitialize();
+    //                   Navigator.of(context).pop();
+    //                 });
+    //               },
+    //               child: Text("Restart"))
+    //         ],
+    //       );
+    //     });
   }
 
   void _movePlayed(int idx) {
@@ -259,7 +283,7 @@ class GamePageState extends State<GamePage> {
                 ],
               ),
             ),
-            Container(
+            SizedBox(
               // color: MyTheme.lightBlueBack,
               // color: MyTheme.lightBlueBack,
               height: height * 0.64,
@@ -347,4 +371,6 @@ class GamePageState extends State<GamePage> {
       ),
     );
   }
+
+
 }
