@@ -3,7 +3,7 @@ import 'dart:ui';
 class MyTheme {
   static Color orange = Color(0xffffe338);
   static const Color yellow = Color(0xffffe338);
-  static Color red = Color(0xfff54d63);
+  static const Color red = Color(0xfff54d63);
   static const Color green = Color(0xff88e339);
 
   static Color lightBlueBack = Color(0xffdedff1);

@@ -24,7 +24,9 @@ class GamePresenter {
     }
 
     // calculate the next move, could be an expensive operation
-    int aiMove = await Future(() => _aiPlayer.play(board, Ai.AI_PLAYER));
+    // int aiMove = await Future(() => _aiPlayer.play(board, Ai.AI_PLAYER));
+
+    int aiMove = await Future.delayed(const Duration(milliseconds: 500), () => _aiPlayer.play(board, Ai.AI_PLAYER));
 
     // do the next move
     board[aiMove] = Ai.AI_PLAYER;

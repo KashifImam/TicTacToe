@@ -38,12 +38,16 @@ class GamePageState extends State<GamePage> with TickerProviderStateMixin{
         context: context,
         transitionAnimationController: controller,
         // isScrollControlled: true,
-        builder: (context) {
-          return FractionallySizedBox(
+        isDismissible: false,
+        isScrollControlled: false,
+        builder: (context) => GestureDetector(
+          child: FractionallySizedBox(
             // heightFactor: 0.7,
             child: FinalPage(type: type, title: title, content: content),
-          );
-        });
+          ),
+          onVerticalDragStart: (_) {},
+        ));
+
 
     // builder: (BuildContext buildContext) => BottomActivateAcc());
   }
