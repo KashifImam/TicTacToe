@@ -51,7 +51,7 @@ class GamePageState extends State<GamePage> with TickerProviderStateMixin{
   void _onGameEnd(int winner) {
     reinitialize();
     var title = "Game over!";
-    var content = "You lose :(";
+    var content = "You lose ☹";
     switch (winner) {
 
       case Ai.HUMAN:
@@ -61,12 +61,12 @@ class GamePageState extends State<GamePage> with TickerProviderStateMixin{
         break;
       case Ai.AI_PLAYER:
         title = "Game Over!";
-        content = "You lose :(";
+        content = "You lose ☹";
         comWins = comWins + 1;
         break;
       default:
-        title = "Draw!";
-        content = "No winners here.";
+        title = "Game Draw!";
+        content = "No winners here ☻";
     }
     showBottomSheet(context, winner, title, content);
 

@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:tictactoerapidor/ai/ai.dart';
 
 import '../custom/symbolo.dart';
 import '../custom/symbolx.dart';
@@ -28,6 +30,14 @@ class _FinalPageState extends State<FinalPage> with TickerProviderStateMixin {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [MyTheme.pink, MyTheme.yellow],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+
+          ),
+        ),
         child:
 
             SizedBox(
@@ -50,26 +60,44 @@ class _FinalPageState extends State<FinalPage> with TickerProviderStateMixin {
                       ),
                     ],
                   ),
+
+
                   Padding(
                     padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
-                    child: Text(
+                    child: NeumorphicText(
                       widget.title,
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: MyTheme.kTextDarkColor,
+                      style: const NeumorphicStyle(
+                          color: MyTheme.blue,
+                          lightSource: LightSource.left,
+                          depth: 9,
+                          shadowDarkColor: MyTheme.green,
+                          shadowLightColor: MyTheme.green,
+                          border: NeumorphicBorder(
+                            color: MyTheme.green,
+                            width: 0.9,
+
+                          )),
+                      textStyle: NeumorphicTextStyle(
+                          fontSize: 32,
+
+
                           fontFamily: 'Mazzard',
-                          fontWeight: FontWeight.normal),
+                          fontWeight: FontWeight.bold
+
+                        //customize size here
+                        // AND others usual text style properties (fontFamily, fontWeight, ...)
+                      ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20, 0, 20, 25),
+                    padding: EdgeInsets.fromLTRB(20, 0, 20, 16),
                     child: Text(
                       widget.content,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 16,
                         fontFamily: 'Mazzard',
-                        color: MyTheme.kTextDarkColor,
+                        color: widget.type == Ai.HUMAN? MyTheme.green : MyTheme.blue ,
                       ),
                     ),
                   ),
@@ -103,20 +131,22 @@ class _FinalPageState extends State<FinalPage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _arrowAnimationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 800));
     _arrowAnimation =
-        Tween(begin: 0.0, end: pi).animate(_arrowAnimationController);
+        Tween(begin: 0.0, end: 1.0).animate(_arrowAnimationController);
 
-    _arrowAnimationController.forward();
+    _arrowAnimationController.repeat(reverse: true);
 
-    Future.delayed(const Duration(seconds: 3)).then((_) {
-      _arrowAnimationController.reverse();
-
-    });
   }
 
 
   void _handleSubmitted() async {
     Navigator.pop(context);
+  }
+
+  @override
+  void dispose() {
+    _arrowAnimationController.dispose();
+    super.dispose();
   }
 }

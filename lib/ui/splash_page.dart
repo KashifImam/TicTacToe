@@ -62,14 +62,13 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _arrowAnimationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 800));
     _arrowAnimation =
-        Tween(begin: 0.0, end: pi).animate(_arrowAnimationController);
+        Tween(begin: 0.0, end: 1.0).animate(_arrowAnimationController);
 
-    _arrowAnimationController.forward();
-
+    _arrowAnimationController.repeat(reverse: true);
     Future.delayed(const Duration(seconds: 3)).then((_) {
-      _arrowAnimationController.reverse();
+
       navigate();
     });
   }
@@ -98,5 +97,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
             child: child,
           );
         });
+  }
+
+  @override
+  void dispose() {
+    _arrowAnimationController.dispose();
+    super.dispose();
   }
 }
