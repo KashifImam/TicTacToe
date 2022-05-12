@@ -113,10 +113,11 @@ class GamePageState extends State<GamePage> {
     return Scaffold(
       backgroundColor: MyTheme.bgColor,
       appBar: AppBar(
+
         centerTitle: true,
         elevation: 0,
         actions: [
-          IconButton(icon: Icon(Icons.refresh,
+          IconButton(icon: const Icon(Icons.refresh,
           color: MyTheme.pink,), onPressed: () {
             yourWins = 0;
             comWins = 0;
@@ -126,7 +127,7 @@ class GamePageState extends State<GamePage> {
 
           }),
         ],
-        backgroundColor: MyTheme.bgColor,
+        backgroundColor: MyTheme.pink,
         title: RichText(
           textAlign: TextAlign.start,
           text: const TextSpan(
@@ -160,150 +161,161 @@ class GamePageState extends State<GamePage> {
           ),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          Container(
-            height: height * 0.18,
-            padding: const EdgeInsets.fromLTRB(0, 12, 0, 16),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "You are",
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: MyTheme.pink,
-                            fontFamily: 'Mazzard',
-                            fontWeight: FontWeight.normal),
-                      ),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      X(32, 10)
-                    ],
-                  ),
-                ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [MyTheme.gredColor2, MyTheme.gredColor1],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
 
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Computer",
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: MyTheme.blue,
-                            fontFamily: 'Mazzard',
-                            fontWeight: FontWeight.normal),
-                      ),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      O(32, MyTheme.green),
-                    ],
-                  ),
-                ),
-              ],
-            ),
           ),
-
-          Container(
-            color: MyTheme.lightBlueBack,
-            height: height * 0.64,
-            child: GridView.count(
-              shrinkWrap: true,
-              controller: new ScrollController(keepScrollOffset: false),
-              // childAspectRatio: 0.9,
-              childAspectRatio: (itemWidth / itemHeight),
-              crossAxisCount: 3,
-
-              // generate the widgets that will display the board
-              children: List.generate(9, (idx) {
-                return Field(
-                    idx: idx,
-                    onTap: _movePlayed,
-                    playerSymbol: getSymbolForIdx(idx)!);
-              }),
-            ),
-          ),
-          Container(
-            height: height * 0.18,
-            padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:  [
-                      Text(
-                        "${yourWins}",
-                        style: const TextStyle(
-                            fontSize: 36,
-                            color: MyTheme.pink,
-                            fontFamily: 'Mazzard',
-                            fontWeight: FontWeight.normal),
-                      ),
-
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      const Text(
-                        "Your Wins",
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: MyTheme.kTextDarkColor,
-                            fontFamily: 'Mazzard',
-                            fontWeight: FontWeight.normal),
-                      ),
-                    ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Container(
+              height: height * 0.18,
+              padding: const EdgeInsets.fromLTRB(0, 12, 0, 16),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "You are",
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: MyTheme.pink,
+                              fontFamily: 'Mazzard',
+                              fontWeight: FontWeight.normal),
+                        ),
+                        const SizedBox(
+                          height: 6,
+                        ),
+                        X(32, 10)
+                      ],
+                    ),
                   ),
-                ),
 
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:  [
-                      Text(
-                        "$comWins",
-                        style: const TextStyle(
-                            fontSize: 36,
-                            color: MyTheme.blue,
-                            fontFamily: 'Mazzard',
-                            fontWeight: FontWeight.normal),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-
-                      const Text(
-                        "Computer's Wins",
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: MyTheme.kTextDarkColor,
-                            fontFamily: 'Mazzard',
-                            fontWeight: FontWeight.normal),
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Computer",
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: MyTheme.blue,
+                              fontFamily: 'Mazzard',
+                              fontWeight: FontWeight.normal),
+                        ),
+                        const SizedBox(
+                          height: 6,
+                        ),
+                        O(32, MyTheme.green),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
 
-        ],
+            Container(
+              // color: MyTheme.lightBlueBack,
+              // color: MyTheme.lightBlueBack,
+              height: height * 0.64,
+              child: GridView.count(
+                shrinkWrap: true,
+                controller: new ScrollController(keepScrollOffset: false),
+                // childAspectRatio: 0.9,
+                childAspectRatio: (itemWidth / itemHeight),
+                crossAxisCount: 3,
+
+                // generate the widgets that will display the board
+                children: List.generate(9, (idx) {
+                  return Field(
+                      idx: idx,
+                      onTap: _movePlayed,
+                      playerSymbol: getSymbolForIdx(idx)!);
+                }),
+              ),
+            ),
+            Container(
+              height: height * 0.18,
+              padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:  [
+                        Text(
+                          "${yourWins}",
+                          style: const TextStyle(
+                              fontSize: 36,
+                              color: MyTheme.pink,
+                              fontFamily: 'Mazzard',
+                              fontWeight: FontWeight.normal),
+                        ),
+
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        const Text(
+                          "Your Wins",
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: MyTheme.kTextDarkColor,
+                              fontFamily: 'Mazzard',
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:  [
+                        Text(
+                          "$comWins",
+                          style: const TextStyle(
+                              fontSize: 36,
+                              color: MyTheme.blue,
+                              fontFamily: 'Mazzard',
+                              fontWeight: FontWeight.normal),
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+
+                        const Text(
+                          "Computer's Wins",
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: MyTheme.kTextDarkColor,
+                              fontFamily: 'Mazzard',
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+          ],
+        ),
       ),
     );
   }

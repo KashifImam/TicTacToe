@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import '../custom/symbolo.dart';
 import '../custom/symbolx.dart';
@@ -14,8 +15,8 @@ class Field extends StatelessWidget {
   Field({required this.idx, required this.onTap, required this.playerSymbol});
 
   final BorderSide _borderSide =  BorderSide(
-      color: MyTheme.kTextWhiteColor,
-      width: 1.8,
+      color: MyTheme.kTextGreyColor,
+      width: 0.5,
       style: BorderStyle.solid
   );
 
@@ -74,29 +75,55 @@ class Field extends StatelessWidget {
 
   Widget getSymbolBackground (String selection){
     if (selection == "X"){
-      return
-        Container(
-          margin: const EdgeInsets.all(0.0),
-          decoration: BoxDecoration(
-            // border: _determineBorder(),
-            color: MyTheme.pink,
 
+      return Container(
+        decoration: BoxDecoration(
+          border: _determineBorder(),
+        ),
+        child: Neumorphic(
+
+          style: const NeumorphicStyle(
+              color: MyTheme.pink,
+              lightSource: LightSource.left,
+              depth: 3,
+              shadowDarkColor: MyTheme.yellow,
+              shadowLightColor: MyTheme.yellow,
+              border: NeumorphicBorder(
+                color: MyTheme.yellow,
+                width: 0.4,
+              )
           ),
+          margin: const EdgeInsets.all(6.0),
+
           child: Center(
             child: getSymbol(playerSymbol),
           ),
-        );
+        ),
+      );
 
     }else if (selection == "O"){
       return Container(
-
-        margin: const EdgeInsets.all(0.0),
         decoration: BoxDecoration(
           border: _determineBorder(),
-          color: MyTheme.blue,
         ),
-        child: Center(
-          child: getSymbol(playerSymbol),
+        child: Neumorphic(
+
+          style: const NeumorphicStyle(
+              color: MyTheme.blue,
+              lightSource: LightSource.left,
+              depth: 3,
+              shadowDarkColor: MyTheme.green,
+              shadowLightColor: MyTheme.green,
+              border: NeumorphicBorder(
+                color: MyTheme.green,
+                width: 0.6,
+              )
+          ),
+          margin: const EdgeInsets.all(6.0),
+
+          child: Center(
+            child: getSymbol(playerSymbol),
+          ),
         ),
       );
     }
@@ -106,6 +133,7 @@ class Field extends StatelessWidget {
         margin: const EdgeInsets.all(0.0),
         decoration: BoxDecoration(
           border: _determineBorder(),
+
         ),
         child: Center(
           child: getSymbol(playerSymbol),
