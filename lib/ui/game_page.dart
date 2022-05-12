@@ -53,7 +53,11 @@ class GamePageState extends State<GamePage> with TickerProviderStateMixin{
   }
 
   void _onGameEnd(int winner) {
-    reinitialize();
+
+    setState(() {
+      reinitialize();
+    });
+
     var title = "Game over!";
     var content = "You lose ☹";
     switch (winner) {
