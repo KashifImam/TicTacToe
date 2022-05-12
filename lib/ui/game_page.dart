@@ -78,25 +78,6 @@ class GamePageState extends State<GamePage> with TickerProviderStateMixin{
     }
     showBottomSheet(context, winner, title, content);
 
-
-    // showDialog(
-    //     context: context,
-    //     builder: (BuildContext context) {
-    //       return AlertDialog(
-    //         title: Text(title),
-    //         content: Text(content),
-    //         actions: <Widget>[
-    //           new FlatButton(
-    //               onPressed: () {
-    //                 setState(() {
-    //                   reinitialize();
-    //                   Navigator.of(context).pop();
-    //                 });
-    //               },
-    //               child: Text("Restart"))
-    //         ],
-    //       );
-    //     });
   }
 
   void _movePlayed(int idx) {
